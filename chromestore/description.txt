@@ -1,0 +1,13 @@
+Effortlessly extract mathematical equations from AI chatbots in your preferred format! π TEX is your go-to tool for seamlessly copying LaTeX and MathML equations from AI conversations.
+✨ Key Features:
+• One-click copying of math equations
+• Support for both LaTeX and MathML formats
+• Clean, intuitive interface
+• Smart hover detection
+• Zero configuration needed
+🤖 Works with:
+• ChatGPT
+• Deepseek Chat
+• Abacus AI
+Perfect for students, researchers, and professionals who need to quickly grab mathematical equations from AI conversations for use in papers, presentations, or documents.
+Install π TEX now and make copying math equations from AI chats a breeze! 🚀

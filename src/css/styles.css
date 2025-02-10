@@ -1,0 +1,111 @@
+.katex-wrapper {
+    position: relative;
+    display: inline-block;
+    padding: 2px 4px;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid transparent;
+}
+
+.katex-wrapper:hover {
+    background: linear-gradient(to bottom right, rgba(47, 47, 47, 0.05), rgba(47, 47, 47, 0.1));
+    border-color: rgba(47, 47, 47, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.katex-wrapper.katex-hover {
+    background: linear-gradient(to bottom right, rgba(47, 47, 47, 0.08), rgba(47, 47, 47, 0.12));
+    z-index: 100;
+}
+
+.katex-tooltip {
+    position: fixed;
+    display: none;
+    background: linear-gradient(to bottom right, #1a1a1a, #2d2d2d);
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    z-index: 1000;
+    font-family: system-ui, -apple-system, sans-serif;
+    animation: tooltipSlideUpAndFade 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+    user-select: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tooltip-content {
+    display: block;
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+/* Add color for success/error states */
+.copy-success ~ .katex-tooltip .tooltip-content {
+    color: #4ade80;
+}
+
+.copy-error ~ .katex-tooltip .tooltip-content {
+    color: #ff4444;
+}
+
+.tooltip-arrow {
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+    transform-origin: center;
+    transform: translateX(-50%) rotate(45deg);
+    pointer-events: none;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes tooltipSlideUpAndFade {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Success state animation */
+@keyframes successPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.katex-wrapper.copy-success {
+    animation: successPulse 0.4s ease-in-out;
+    background-color: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.2);
+}
+
+/* Error state */
+.katex-wrapper.copy-error {
+    background-color: rgba(255, 82, 82, 0.1);
+    border-color: rgba(255, 82, 82, 0.2);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .katex-wrapper:hover {
+        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.08));
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .katex-wrapper.katex-hover {
+        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.12));
+    }
+}
