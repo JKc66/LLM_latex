@@ -11,20 +11,24 @@
 
 .katex-wrapper:hover {
     background: rgba(0, 0, 0, 0.03);
-    border-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.08);
     box-shadow: 
         0 2px 8px -1px rgba(0, 0, 0, 0.05),
-        0 1px 2px -1px rgba(0, 0, 0, 0.03);
+        0 1px 2px -1px rgba(0, 0, 0, 0.03),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        0 0 0 1px rgba(0, 0, 0, 0.03);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
 }
 
 .katex-wrapper.katex-hover {
     background: rgba(0, 0, 0, 0.04);
-    border-color: rgba(0, 0, 0, 0.12);
+    border-color: rgba(0, 0, 0, 0.1);
     box-shadow: 
         0 4px 12px -2px rgba(0, 0, 0, 0.08),
-        0 2px 4px -1px rgba(0, 0, 0, 0.05);
+        0 2px 4px -1px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
     z-index: 100;
 }
 
@@ -43,11 +47,12 @@
     user-select: none;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 
         0 4px 12px -1px rgba(0, 0, 0, 0.2),
         0 2px 4px -1px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        inset 0 1px 0 rgba(255, 255, 255, 0.2),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.05);
     transform-origin: center bottom;
 }
 
@@ -82,8 +87,8 @@
     transform-origin: center;
     transform: translateX(-50%) rotate(45deg);
     pointer-events: none;
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }
@@ -134,23 +139,38 @@
 @media (prefers-color-scheme: dark) {
     .katex-wrapper:hover {
         background: rgba(255, 255, 255, 0.04);
-        border-color: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.08);
         box-shadow: 
             0 2px 8px -1px rgba(0, 0, 0, 0.2),
-            0 1px 2px -1px rgba(0, 0, 0, 0.1);
+            0 1px 2px -1px rgba(0, 0, 0, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05),
+            0 0 0 1px rgba(255, 255, 255, 0.03);
     }
     
     .katex-wrapper.katex-hover {
         background: rgba(255, 255, 255, 0.06);
-        border-color: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.12);
         box-shadow: 
             0 4px 12px -2px rgba(0, 0, 0, 0.3),
+            0 2px 4px -1px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08),
             0 2px 4px -1px rgba(0, 0, 0, 0.2);
     }
 
     .katex-tooltip {
         background: rgba(0, 0, 0, 0.75);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 
+            0 4px 12px -1px rgba(0, 0, 0, 0.3),
+            0 2px 4px -1px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05),
+            0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    .tooltip-arrow {
+        border-left: 1px solid rgba(255, 255, 255, 0.08);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
     }
 
     .katex-wrapper.copy-success {
