@@ -6,14 +6,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add event listeners to buttons
     latexButton.addEventListener('click', function() {
         chrome.storage.sync.set({ format: 'latex' }, function() {
-            console.log("Format set to LaTeX");
             updateButtonStyles('latex');
         });
     });
     
     mathmlButton.addEventListener('click', function() {
         chrome.storage.sync.set({ format: 'mathml' }, function() {
-            console.log("Format set to MathML");
             updateButtonStyles('mathml');
         });
     });
@@ -30,7 +28,6 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (selectedFormat === 'mathml') {
             mathmlButton.classList.add('button-selected');
         }
-        console.log('changed css');
     }
     
     // Initialize with stored format or default to 'mathml'

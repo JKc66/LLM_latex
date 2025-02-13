@@ -57,14 +57,12 @@ function setupEquation(equation) {
 
   // Add new recovery mechanism
   async function reinitializeExtension() {
-    console.log('Attempting to reinitialize extension context...');
     
     // Wait a bit to allow context to potentially recover
     await new Promise(resolve => setTimeout(resolve, 1000));
     
     // Check if context is available
     if (chrome?.runtime?.id) {
-      console.log('Extension context recovered, reinitializing...');
       initialize();
       return true;
     }
@@ -97,7 +95,6 @@ function setupEquation(equation) {
         return await chrome.storage.sync.get('format');
       }, 5, 1000); // Increased retries and delay for better recovery chance
 
-      console.log('Format:', format);
       let mathmlContent;
       if (format.format === 'latex') {
         mathmlContent = equation.closest('.katex').querySelector('annotation').innerHTML;
@@ -109,7 +106,6 @@ function setupEquation(equation) {
           throw new Error('MathML element not found');
         }
         
-        console.log('Initial MathML structure:', mathElement.outerHTML);
         
         // Create initial XML template
         const template = `<mml:math xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"></mml:math>`;
@@ -297,7 +293,6 @@ function setupEquation(equation) {
         
       wrapper.style.backgroundColor = '';
       if (mathmlContent) {
-        console.log('Copying content:', mathmlContent); // Debug log
         navigator.clipboard.writeText(mathmlContent).then(() => {
           wrapper.classList.add('copy-success');
           tooltip.querySelector('.tooltip-content').textContent = 'Copied!';
@@ -369,14 +364,11 @@ function setupEquation(equation) {
 }
 
 function initialize() {
-    console.log('Initializing KaTeX MathML Copier...');
     
     // Validate extension context before proceeding
     if (!chrome?.runtime?.id) {
-      console.log('Extension context not available, attempting recovery...');
       reinitializeExtension().then(recovered => {
         if (!recovered) {
-          console.log('Could not recover extension context - waiting for refresh');
           return;
         }
       });
@@ -385,10 +377,8 @@ function initialize() {
     
     // Select all KaTeX elements
     const equations = document.querySelectorAll('.katex-html:not([data-katex-processed])');
-    console.log(`Found ${equations.length} KaTeX equations`);
     
     equations.forEach(equation => {
-        console.log(`Setting up equation`);
         setupEquation(equation);
         equation.setAttribute('data-katex-processed', 'true');
     });
@@ -397,7 +387,6 @@ function initialize() {
     const observer = new MutationObserver(mutations => {
         const newEquations = document.querySelectorAll('.katex-html:not([data-katex-processed])');
         if (newEquations.length > 0) {
-            console.log(`Found ${newEquations.length} new equations`);
             newEquations.forEach(equation => {
                 setupEquation(equation);
                 equation.setAttribute('data-katex-processed', 'true');
@@ -413,10 +402,8 @@ function initialize() {
 
 // Start when DOM is ready
 if (document.readyState === 'loading') {
-  console.log('Document still loading, adding DOMContentLoaded listener');
   document.addEventListener('DOMContentLoaded', initialize);
 } else {
-  console.log('Document already loaded, initializing immediately');
   initialize();
 }
 
