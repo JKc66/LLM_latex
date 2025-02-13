@@ -2,38 +2,53 @@
     position: relative;
     display: inline-block;
     padding: 2px 4px;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     border: 1px solid transparent;
+    background: transparent;
 }
 
 .katex-wrapper:hover {
-    background: linear-gradient(to bottom right, rgba(47, 47, 47, 0.05), rgba(47, 47, 47, 0.1));
-    border-color: rgba(47, 47, 47, 0.1);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 
+        0 2px 8px -1px rgba(0, 0, 0, 0.05),
+        0 1px 2px -1px rgba(0, 0, 0, 0.03);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
 .katex-wrapper.katex-hover {
-    background: linear-gradient(to bottom right, rgba(47, 47, 47, 0.08), rgba(47, 47, 47, 0.12));
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.12);
+    box-shadow: 
+        0 4px 12px -2px rgba(0, 0, 0, 0.08),
+        0 2px 4px -1px rgba(0, 0, 0, 0.05);
     z-index: 100;
 }
 
 .katex-tooltip {
     position: fixed;
     display: none;
-    background: linear-gradient(to bottom right, #1a1a1a, #2d2d2d);
+    background: rgba(255, 255, 255, 0.1);
     color: #fff;
-    padding: 6px 12px;
-    border-radius: 6px;
+    padding: 8px 16px;
+    border-radius: 12px;
     font-size: 13px;
     z-index: 1000;
     font-family: system-ui, -apple-system, sans-serif;
-    animation: tooltipSlideUpAndFade 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: tooltipSlideUpAndFade 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     pointer-events: none;
     user-select: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 4px 12px -1px rgba(0, 0, 0, 0.2),
+        0 2px 4px -1px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform-origin: center bottom;
 }
 
 .tooltip-content {
@@ -43,15 +58,18 @@
     pointer-events: none;
     font-weight: 500;
     letter-spacing: 0.3px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Add color for success/error states */
 .copy-success ~ .katex-tooltip .tooltip-content {
     color: #4ade80;
+    text-shadow: 0 0 10px rgba(74, 222, 128, 0.3);
 }
 
 .copy-error ~ .katex-tooltip .tooltip-content {
     color: #ff4444;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
 }
 
 .tooltip-arrow {
@@ -60,52 +78,94 @@
     left: 50%;
     width: 8px;
     height: 8px;
-    background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+    background: inherit;
     transform-origin: center;
     transform: translateX(-50%) rotate(45deg);
     pointer-events: none;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 @keyframes tooltipSlideUpAndFade {
     from {
         opacity: 0;
-        transform: translateY(4px);
+        transform: translateY(8px) scale(0.96);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
     }
 }
 
 /* Success state animation */
 @keyframes successPulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+    0% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.02); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.8; }
 }
 
 .katex-wrapper.copy-success {
-    animation: successPulse 0.4s ease-in-out;
-    background-color: rgba(16, 185, 129, 0.1);
+    animation: successPulse 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(16, 185, 129, 0.08);
     border-color: rgba(16, 185, 129, 0.2);
+    box-shadow: 
+        0 4px 12px -1px rgba(16, 185, 129, 0.1),
+        0 2px 4px -1px rgba(16, 185, 129, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
 /* Error state */
 .katex-wrapper.copy-error {
-    background-color: rgba(255, 82, 82, 0.1);
+    background: rgba(255, 82, 82, 0.08);
     border-color: rgba(255, 82, 82, 0.2);
+    box-shadow: 
+        0 4px 12px -1px rgba(255, 82, 82, 0.1),
+        0 2px 4px -1px rgba(255, 82, 82, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
     .katex-wrapper:hover {
-        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.08));
+        background: rgba(255, 255, 255, 0.04);
         border-color: rgba(255, 255, 255, 0.1);
+        box-shadow: 
+            0 2px 8px -1px rgba(0, 0, 0, 0.2),
+            0 1px 2px -1px rgba(0, 0, 0, 0.1);
     }
     
     .katex-wrapper.katex-hover {
-        background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.12));
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.15);
+        box-shadow: 
+            0 4px 12px -2px rgba(0, 0, 0, 0.3),
+            0 2px 4px -1px rgba(0, 0, 0, 0.2);
+    }
+
+    .katex-tooltip {
+        background: rgba(0, 0, 0, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .katex-wrapper.copy-success {
+        background: rgba(16, 185, 129, 0.15);
+        border-color: rgba(16, 185, 129, 0.3);
+        box-shadow: 
+            0 4px 12px -1px rgba(16, 185, 129, 0.2),
+            0 2px 4px -1px rgba(16, 185, 129, 0.1);
+    }
+    
+    .katex-wrapper.copy-error {
+        background: rgba(255, 82, 82, 0.15);
+        border-color: rgba(255, 82, 82, 0.3);
+        box-shadow: 
+            0 4px 12px -1px rgba(255, 82, 82, 0.2),
+            0 2px 4px -1px rgba(255, 82, 82, 0.1);
     }
 }
